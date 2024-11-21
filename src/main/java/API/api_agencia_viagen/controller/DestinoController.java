@@ -52,15 +52,24 @@ public class DestinoController {
     }
 
     @GetMapping("/buscarPorNome/{nome}")
-public ResponseEntity<List<Destino>> buscarPorNome(@PathVariable String nome) {
-    List<Destino> destinos = destinoService.findByNome(nome);
-    return ResponseEntity.ok(destinos);
-}
+    public ResponseEntity<List<Destino>> buscarPorNome(@PathVariable String nome) {
+        List<Destino> destinos = destinoService.findByNome(nome);
+        return ResponseEntity.ok(destinos);
+    }
 
-@GetMapping("/buscarPorLocalizacao/{localizacao}")
-public ResponseEntity<List<Destino>> buscarPorLocalizacao(@PathVariable String localizacao) {
-    List<Destino> destinos = destinoService.findByLocalizacao(localizacao);
-    return ResponseEntity.ok(destinos);
-}
+    @GetMapping("/buscarPorLocalizacao/{localizacao}")
+    public ResponseEntity<List<Destino>> buscarPorLocalizacao(@PathVariable String localizacao) {
+        List<Destino> destinos = destinoService.findByLocalizacao(localizacao);
+        return ResponseEntity.ok(destinos);
+    }
+    @GetMapping("/{id}/descricao")
+    public ResponseEntity<String> getDescricaoById(@PathVariable Long id) {
+        Optional<Destino> destino = destinoService.getDestinoById(id);
+            if(destino.isPresent()) {
+                return new ResponseEntity<>(destino.get().getDescricao(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+    }
 
 }
