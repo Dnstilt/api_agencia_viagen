@@ -12,25 +12,32 @@ public class Destino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String description;
+    private String nome;
+    private String localizacao;
+    private String descricao;
     public Long getId() {
         return id;
     }
     public void setId(Long id) {
         this.id = id;
     }
-    public String getTitle() {
-        return title;
+    public String getNome() {
+        return nome;
     }
-    public void setTitle(String title) {
-        this.title = title;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    public String getDescription() {
-        return description;
+    public String getLocalizacao() {
+        return localizacao;
     }
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     
 }

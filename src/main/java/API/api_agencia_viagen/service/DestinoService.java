@@ -37,4 +37,12 @@ public class DestinoService {
     public void deleteDestino(Long id) {
         destinoRepository.deleteById(id);;
     }
+
+    public List<Destino> findByNome(String nome) {
+        return destinoRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    public List<Destino> findByLocalizacao(String localizacao) {
+        return destinoRepository.findByLocalizacaoContainingIgnoreCase(localizacao);
+    }
 }

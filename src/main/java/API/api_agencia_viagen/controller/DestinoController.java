@@ -50,4 +50,17 @@ public class DestinoController {
         destinoService.deleteDestino(id);;
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/buscarPorNome/{nome}")
+public ResponseEntity<List<Destino>> buscarPorNome(@PathVariable String nome) {
+    List<Destino> destinos = destinoService.findByNome(nome);
+    return ResponseEntity.ok(destinos);
+}
+
+@GetMapping("/buscarPorLocalizacao/{localizacao}")
+public ResponseEntity<List<Destino>> buscarPorLocalizacao(@PathVariable String localizacao) {
+    List<Destino> destinos = destinoService.findByLocalizacao(localizacao);
+    return ResponseEntity.ok(destinos);
+}
+
 }
