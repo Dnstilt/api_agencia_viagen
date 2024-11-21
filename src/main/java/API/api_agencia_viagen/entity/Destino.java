@@ -4,7 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
+
+import java.util.List;
+
 
 @Entity
 @Table(name = "destino")
@@ -15,6 +20,10 @@ public class Destino {
     private String nome;
     private String localizacao;
     private String descricao;
+
+    @OneToMany(mappedBy = "destino", cascade = CascadeType.ALL)
+    private List<PacoteViagem> pacotesViagem;
+
     public Long getId() {
         return id;
     }
@@ -39,5 +48,9 @@ public class Destino {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+    public List<PacoteViagem> getPacotesViagem() {
+        return pacotesViagem;
+    } public void setPacotesViagem(List<PacoteViagem> pacotesViagem) {
+        this.pacotesViagem = pacotesViagem;
+    }
 }
