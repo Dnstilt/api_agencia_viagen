@@ -1,39 +1,40 @@
 package API.api_agencia_viagen.service;
 import API.api_agencia_viagen.entity.Destino;
+import API.api_agencia_viagen.repository.DestinoRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
 
 @Service
 public class DestinoService {
-    private List<Destino> destinos = new ArrayList();
+    
+    @Autowired
+    private DestinoRepository destinoRepository;
 
     public List<Destino> getAllDestinos() {
-        return this.destinos;
+        return destinoRepository.findAll();
     }
     
     public Destino createDestino(Destino destino) {
-        destinos.add(destino);
+        destinoRepository.save(destino);
         return destino;
     }
 
-    public Destino getDestinoById(Long id) {
-        Destino destino = destinos.stream().filter(d -> d.getId() == id).findFirst().get();
-        return destino;
+    public Optional<Destino> getDestinoById(Long id) {
+        return destinoRepository.findById(id);
     }
     
     public Destino updateDestino(Long id, Destino destino) {
-        this.destinos = destinos.stream().map(d -> {
-        if(d.getId() == id){
-            return destino;
-        } return d;
-        }).collect(Collectors.toList());
+        destino.setId(id);
+        destinoRepository.save(destino);
         return destino;
     }
 
     public void deleteDestino(Long id) {
-        destinos.removeIf(d -> d.getId() == id);
+        destinoRepository.deleteById(id);;
     }
 }

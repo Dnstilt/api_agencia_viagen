@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/destinos")
@@ -29,8 +30,13 @@ public class DestinoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Destino> getDestinoById(@PathVariable Long id) {
-        Destino destino = destinoService.getDestinoById(id);
-        return new ResponseEntity<>(destino, HttpStatus.OK);
+        Optional<Destino> destino = destinoService.getDestinoById(id);
+            if(destino.isPresent()) {
+                return new ResponseEntity<>(destino.get(), HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(new Destino(), HttpStatus.NO_CONTENT);
+            }
     }
 
     @PutMapping("/{id}")
